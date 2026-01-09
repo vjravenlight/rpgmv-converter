@@ -5,6 +5,10 @@ Encripta y desencripta imágenes y audio de RPG Maker MV/MZ
 by Karl Ravenlight
 """
 
+# ============================================================================
+# IMPORTS // Librerias necesarias para el funcionamiento
+# ============================================================================
+
 import os
 import sys
 import threading
@@ -19,14 +23,14 @@ import io
 import time
 
 # ============================================================================
-# CONSTANTES
+# CONSTANTES // Valores fijos usados en toda la aplicacion
 # ============================================================================
 
 VERSION = "1.2.0"
 RPGMV_HEADER = b'RPGMV\x00\x00\x00\x00\x03\x01\x00\x00\x00\x00\x00'
 
 # ============================================================================
-# SISTEMA DE IDIOMAS
+# SISTEMA DE IDIOMAS // Traducciones ES/EN para toda la interfaz
 # ============================================================================
 
 LANGUAGES = {
@@ -200,7 +204,7 @@ FILE_HEADERS = {
 }
 
 # ============================================================================
-# FUNCIONES DE ENCRIPTACIÓN/DESENCRIPTACIÓN
+# FUNCIONES DE ENCRIPTACIÓN/DESENCRIPTACIÓN // Logica XOR para archivos RPGMV
 # ============================================================================
 
 def is_rpgmv_encrypted(file_path: str) -> bool:
@@ -328,7 +332,7 @@ def get_full_image(file_path: str) -> Optional[Image.Image]:
         return None
 
 # ============================================================================
-# TEMA Y COLORES
+# TEMA Y COLORES // Paleta de colores para la interfaz oscura
 # ============================================================================
 
 COLORS = {
@@ -350,7 +354,7 @@ COLORS = {
 }
 
 # ============================================================================
-# SLIDESHOW WINDOW
+# SLIDESHOW WINDOW // Ventana fullscreen para ver imagenes con navegacion
 # ============================================================================
 
 class SlideshowWindow:
@@ -551,7 +555,7 @@ class SlideshowWindow:
 
 
 # ============================================================================
-# FILE PANEL (reutilizable para PNG y OGG)
+# FILE PANEL // Panel reutilizable para manejar archivos PNG y OGG
 # ============================================================================
 
 class FilePanel:
@@ -1090,7 +1094,7 @@ class FilePanel:
 
 
 # ============================================================================
-# APLICACIÓN PRINCIPAL
+# APLICACIÓN PRINCIPAL // Clase principal que crea la ventana y tabs
 # ============================================================================
 
 class RPGMVConverterApp:
@@ -1464,7 +1468,7 @@ class RPGMVConverterApp:
 
 
 # ============================================================================
-# MAIN
+# MAIN // Punto de entrada de la aplicacion
 # ============================================================================
 
 def main():
