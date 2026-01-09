@@ -22,8 +22,158 @@ import time
 # CONSTANTES
 # ============================================================================
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 RPGMV_HEADER = b'RPGMV\x00\x00\x00\x00\x03\x01\x00\x00\x00\x00\x00'
+
+# ============================================================================
+# SISTEMA DE IDIOMAS
+# ============================================================================
+
+LANGUAGES = {
+    'es': {
+        'name': 'Español',
+        'flag': '🇪🇸',
+        # UI General
+        'title': 'RPGMV Converter // RAVENLIGHT EDITION',
+        'ready': 'Listo',
+        'completed': 'Completado',
+        'files': 'archivos',
+        'file': 'archivo',
+        # Tabs
+        'tab_png': '  PNG  ',
+        'tab_ogg': '  OGG  ',
+        'tab_about': '  ACERCA DE  ',
+        # File Panel
+        'images_png': 'IMAGENES (PNG)',
+        'audio_ogg': 'AUDIO (OGG)',
+        'preview': 'PREVIEW',
+        'options': 'OPCIONES',
+        'preserve_structure': 'Preservar estructura',
+        'select_files': 'Archivos',
+        'select_folder': 'Carpeta',
+        'clear': 'Limpiar',
+        'slideshow': 'Slideshow',
+        'decrypt': 'DESENCRIPTAR',
+        'encrypt': 'ENCRIPTAR',
+        'drop_zone': 'Arrastra archivos o haz clic para seleccionar',
+        'select_image': 'Selecciona una imagen\n\nDoble-click para slideshow',
+        'audio_no_preview': '🎵 Audio\nSin preview disponible\n\nSelecciona archivos y usa\nDESENCRIPTAR para exportar',
+        'no_files': 'No hay archivos para procesar',
+        'no_slideshow_files': 'No hay archivos cargados',
+        'key_loaded': 'Clave cargada desde JSON',
+        'key_detected': 'Clave detectada automaticamente',
+        'key_not_found': "No se encontro 'encryptionKey' en el archivo",
+        'using_key': 'Usando clave',
+        'folder': 'Carpeta',
+        'added_files': 'Agregados {0} archivos',
+        'completed_stats': 'Completado: {0} OK, {1} errores',
+        'select_output': 'Seleccionar carpeta de salida',
+        'select_json': 'Seleccionar System.json',
+        'error_json': 'Error al leer JSON',
+        # Slideshow
+        'slideshow_title': 'Slideshow - RPGMV Converter',
+        'slideshow_files': 'ARCHIVOS',
+        'slideshow_prev': '< PREV',
+        'slideshow_next': 'NEXT >',
+        'slideshow_close': 'CERRAR',
+        'slideshow_help1': 'Click izq: siguiente | Click der: anterior',
+        'slideshow_help2': 'Flechas / Espacio: navegar | ESC: cerrar',
+        'slideshow_no_images': 'No hay imagenes para mostrar',
+        'slideshow_error': 'Error al cargar imagen',
+        # About
+        'about_made_for': '[ HECHO ESPECIFICAMENTE PARA ]',
+        'about_game_desc': 'Un juego de RPG Maker MV',
+        'about_coded_by': 'CODED BY',
+        'about_protection': 'PROTECTION',
+        'about_status': 'STATUS',
+        'about_release': 'RELEASE',
+        'about_working': '100% Working',
+        'about_links': '>> LINKS',
+        'about_compat_title': '[!] COMPATIBILIDAD:',
+        'about_compat1': '    Aunque fue hecho para Look Outside, este programa',
+        'about_compat2': '    funciona con CUALQUIER juego de RPG Maker MV/MZ',
+        'about_compat3': '    que use encriptacion RPGMV estandar.',
+        'about_quote': '"Breaking barriers between creators and their assets"',
+        'about_greets': '═══════════[ GREETS TO ALL RPGMAKER DEVS ]═══════════',
+        # Status bar
+        'status_by': 'by Karl Ravenlight',
+    },
+    'en': {
+        'name': 'English',
+        'flag': '🇺🇸',
+        # UI General
+        'title': 'RPGMV Converter // RAVENLIGHT EDITION',
+        'ready': 'Ready',
+        'completed': 'Completed',
+        'files': 'files',
+        'file': 'file',
+        # Tabs
+        'tab_png': '  PNG  ',
+        'tab_ogg': '  OGG  ',
+        'tab_about': '  ABOUT  ',
+        # File Panel
+        'images_png': 'IMAGES (PNG)',
+        'audio_ogg': 'AUDIO (OGG)',
+        'preview': 'PREVIEW',
+        'options': 'OPTIONS',
+        'preserve_structure': 'Preserve structure',
+        'select_files': 'Files',
+        'select_folder': 'Folder',
+        'clear': 'Clear',
+        'slideshow': 'Slideshow',
+        'decrypt': 'DECRYPT',
+        'encrypt': 'ENCRYPT',
+        'drop_zone': 'Drag files or click to select',
+        'select_image': 'Select an image\n\nDouble-click for slideshow',
+        'audio_no_preview': '🎵 Audio\nNo preview available\n\nSelect files and use\nDECRYPT to export',
+        'no_files': 'No files to process',
+        'no_slideshow_files': 'No files loaded',
+        'key_loaded': 'Key loaded from JSON',
+        'key_detected': 'Key detected automatically',
+        'key_not_found': "'encryptionKey' not found in file",
+        'using_key': 'Using key',
+        'folder': 'Folder',
+        'added_files': 'Added {0} files',
+        'completed_stats': 'Completed: {0} OK, {1} errors',
+        'select_output': 'Select output folder',
+        'select_json': 'Select System.json',
+        'error_json': 'Error reading JSON',
+        # Slideshow
+        'slideshow_title': 'Slideshow - RPGMV Converter',
+        'slideshow_files': 'FILES',
+        'slideshow_prev': '< PREV',
+        'slideshow_next': 'NEXT >',
+        'slideshow_close': 'CLOSE',
+        'slideshow_help1': 'Left click: next | Right click: previous',
+        'slideshow_help2': 'Arrows / Space: navigate | ESC: close',
+        'slideshow_no_images': 'No images to display',
+        'slideshow_error': 'Error loading image',
+        # About
+        'about_made_for': '[ MADE SPECIFICALLY FOR ]',
+        'about_game_desc': 'An RPG Maker MV game',
+        'about_coded_by': 'CODED BY',
+        'about_protection': 'PROTECTION',
+        'about_status': 'STATUS',
+        'about_release': 'RELEASE',
+        'about_working': '100% Working',
+        'about_links': '>> LINKS',
+        'about_compat_title': '[!] COMPATIBILITY:',
+        'about_compat1': '    Although made for Look Outside, this program',
+        'about_compat2': '    works with ANY RPG Maker MV/MZ game',
+        'about_compat3': '    using standard RPGMV encryption.',
+        'about_quote': '"Breaking barriers between creators and their assets"',
+        'about_greets': '═══════════[ GREETS TO ALL RPGMAKER DEVS ]═══════════',
+        # Status bar
+        'status_by': 'by Karl Ravenlight',
+    }
+}
+
+# Idioma actual (por defecto español)
+current_language = 'es'
+
+def t(key: str) -> str:
+    """Obtiene el texto traducido para la clave dada"""
+    return LANGUAGES.get(current_language, LANGUAGES['es']).get(key, key)
 RPGMV_HEADER_SIZE = 16
 
 PNG_HEADER = bytes([
@@ -458,11 +608,11 @@ class FilePanel:
         header = tk.Frame(frame, bg=COLORS['bg_card'])
         header.pack(fill=tk.X, padx=15, pady=(15, 10))
 
-        title = "IMAGENES (PNG)" if self.file_type == 'png' else "AUDIO (OGG)"
+        title = t('images_png') if self.file_type == 'png' else t('audio_ogg')
         tk.Label(header, text=title, font=('Segoe UI', 11, 'bold'),
                 bg=COLORS['bg_card'], fg=self.color).pack(side=tk.LEFT)
 
-        self.file_count_label = tk.Label(header, text="0 archivos",
+        self.file_count_label = tk.Label(header, text=f"0 {t('files')}",
                                          font=('Consolas', 9),
                                          bg=COLORS['bg_card'], fg=COLORS['text_dim'])
         self.file_count_label.pack(side=tk.RIGHT)
@@ -473,8 +623,7 @@ class FilePanel:
         drop_zone.pack(fill=tk.X, padx=15, pady=(0, 10))
         drop_zone.pack_propagate(False)
 
-        drop_text = "Arrastra archivos o haz clic para seleccionar"
-        self.drop_label = tk.Label(drop_zone, text=drop_text,
+        self.drop_label = tk.Label(drop_zone, text=t('drop_zone'),
                                    font=('Segoe UI', 10),
                                    bg=COLORS['bg_input'], fg=COLORS['text_dim'],
                                    cursor='hand2')
@@ -504,13 +653,13 @@ class FilePanel:
         btn_frame = tk.Frame(frame, bg=COLORS['bg_card'])
         btn_frame.pack(fill=tk.X, padx=15, pady=(0, 15))
 
-        self.create_btn(btn_frame, "Archivos", self.select_files).pack(side=tk.LEFT, padx=(0, 5))
-        self.create_btn(btn_frame, "Carpeta", self.select_folder).pack(side=tk.LEFT, padx=(0, 5))
-        self.create_btn(btn_frame, "Limpiar", self.clear_files, danger=True).pack(side=tk.RIGHT)
+        self.create_btn(btn_frame, t('select_files'), self.select_files).pack(side=tk.LEFT, padx=(0, 5))
+        self.create_btn(btn_frame, t('select_folder'), self.select_folder).pack(side=tk.LEFT, padx=(0, 5))
+        self.create_btn(btn_frame, t('clear'), self.clear_files, danger=True).pack(side=tk.RIGHT)
 
         # Slideshow button (only for PNG)
         if self.file_type == 'png':
-            self.create_btn(btn_frame, "Slideshow", self.open_slideshow,
+            self.create_btn(btn_frame, t('slideshow'), self.open_slideshow,
                            color=COLORS['accent_cyan']).pack(side=tk.RIGHT, padx=(0, 5))
 
         return frame
@@ -524,12 +673,12 @@ class FilePanel:
         header = tk.Frame(frame, bg=COLORS['bg_card'])
         header.pack(fill=tk.X, padx=15, pady=(15, 10))
 
-        tk.Label(header, text="PREVIEW", font=('Segoe UI', 11, 'bold'),
+        tk.Label(header, text=t('preview'), font=('Segoe UI', 11, 'bold'),
                 bg=COLORS['bg_card'], fg=COLORS['text']).pack(side=tk.LEFT)
 
         # Slideshow button in preview header (only for PNG)
         if self.file_type == 'png':
-            self.slideshow_btn = tk.Button(header, text="⛶ SLIDESHOW", command=self.open_slideshow,
+            self.slideshow_btn = tk.Button(header, text=f"⛶ {t('slideshow').upper()}", command=self.open_slideshow,
                                            font=('Segoe UI', 9, 'bold'),
                                            bg=COLORS['accent_cyan'], fg='white',
                                            activebackground=COLORS['accent'],
@@ -550,11 +699,11 @@ class FilePanel:
         self.preview_canvas.bind('<Configure>', self.on_canvas_resize)
 
         if self.file_type == 'png':
-            placeholder = "Selecciona una imagen\n\nDoble-click para slideshow"
+            placeholder = t('select_image')
             # Make canvas clickable for slideshow
             self.preview_canvas.bind('<Double-Button-1>', lambda e: self.open_slideshow())
         else:
-            placeholder = "🎵 Audio\nSin preview disponible\n\nSelecciona archivos y usa\nDESENCRIPTAR para exportar"
+            placeholder = t('audio_no_preview')
 
         self.preview_canvas.create_text(200, 150, text=placeholder,
                                         fill=COLORS['text_dim'], font=('Segoe UI', 11),
@@ -569,12 +718,12 @@ class FilePanel:
         header = tk.Frame(frame, bg=COLORS['bg_card'])
         header.pack(fill=tk.X, padx=10, pady=(10, 8))
 
-        tk.Label(header, text="OPCIONES", font=('Segoe UI', 10, 'bold'),
+        tk.Label(header, text=t('options'), font=('Segoe UI', 10, 'bold'),
                 bg=COLORS['bg_card'], fg=COLORS['text']).pack(side=tk.LEFT)
 
         # Preserve structure checkbox en el header
         self.preserve_var = tk.BooleanVar(value=True)
-        tk.Checkbutton(header, text="Preservar estructura",
+        tk.Checkbutton(header, text=t('preserve_structure'),
                       variable=self.preserve_var,
                       font=('Segoe UI', 8), bg=COLORS['bg_card'], fg=COLORS['text_dim'],
                       selectcolor=COLORS['bg_input'], activebackground=COLORS['bg_card'],
@@ -641,7 +790,7 @@ class FilePanel:
                                             maximum=100, style=style_name)
         self.progress_bar.pack(fill=tk.X, side=tk.LEFT, expand=True)
 
-        self.progress_label = tk.Label(progress_frame, text="Listo", width=15,
+        self.progress_label = tk.Label(progress_frame, text=t('ready'), width=15,
                                        font=('Consolas', 9), bg=COLORS['bg_main'],
                                        fg=COLORS['text_dim'])
         self.progress_label.pack(side=tk.RIGHT, padx=(10, 0))
@@ -653,13 +802,13 @@ class FilePanel:
         btn_frame = tk.Frame(bottom, bg=COLORS['bg_main'])
         btn_frame.pack(side=tk.LEFT)
 
-        self.decrypt_btn = tk.Button(btn_frame, text="DESENCRIPTAR", command=self.start_decrypt,
+        self.decrypt_btn = tk.Button(btn_frame, text=t('decrypt'), command=self.start_decrypt,
                                      font=('Segoe UI', 11, 'bold'), bg=self.color, fg='white',
                                      activebackground=COLORS['accent_hover'],
                                      relief='flat', cursor='hand2', padx=25, pady=10)
         self.decrypt_btn.pack(side=tk.LEFT, padx=(0, 10))
 
-        self.encrypt_btn = tk.Button(btn_frame, text="ENCRIPTAR", command=self.start_encrypt,
+        self.encrypt_btn = tk.Button(btn_frame, text=t('encrypt'), command=self.start_encrypt,
                                      font=('Segoe UI', 11, 'bold'), bg=self.color, fg='white',
                                      activebackground=COLORS['accent_hover'],
                                      relief='flat', cursor='hand2', padx=25, pady=10)
@@ -795,8 +944,8 @@ class FilePanel:
                     except:
                         self.file_listbox.insert(tk.END, file.name)
         self.update_count()
-        self.log(f"Carpeta: {folder}")
-        self.log(f"Agregados {count} archivos")
+        self.log(f"{t('folder')}: {folder}")
+        self.log(t('added_files').format(count))
 
     def clear_files(self):
         self.files.clear()
@@ -808,7 +957,8 @@ class FilePanel:
 
     def update_count(self):
         count = len(self.files)
-        self.file_count_label.config(text=f"{count} archivo{'s' if count != 1 else ''}")
+        word = t('file') if count == 1 else t('files')
+        self.file_count_label.config(text=f"{count} {word}")
 
     def on_file_select(self, event):
         selection = self.file_listbox.curselection()
@@ -857,7 +1007,7 @@ class FilePanel:
 
     def open_slideshow(self):
         if not self.files:
-            messagebox.showwarning("Slideshow", "No hay archivos cargados")
+            messagebox.showwarning("Slideshow", t('no_slideshow_files'))
             return
         selection = self.file_listbox.curselection()
         start = selection[0] if selection else 0
@@ -866,21 +1016,21 @@ class FilePanel:
     # Processing
     def start_decrypt(self):
         if not self.files:
-            messagebox.showwarning("Aviso", "No hay archivos para procesar")
+            messagebox.showwarning("Warning", t('no_files'))
             return
         # Usar clave del campo o detectada
         key = self.get_current_key()
         if key:
-            self.log(f"Usando clave: {key.hex()[:16]}...")
+            self.log(f"{t('using_key')}: {key.hex()[:16]}...")
         self.start_processing(lambda f, o: decrypt_file(f, o, key), "decrypt")
 
     def start_encrypt(self):
         if not self.files:
-            messagebox.showwarning("Aviso", "No hay archivos para procesar")
+            messagebox.showwarning("Warning", t('no_files'))
             return
         key = self.get_current_key()
         if key:
-            self.log(f"Usando clave: {key.hex()[:16]}...")
+            self.log(f"{t('using_key')}: {key.hex()[:16]}...")
         self.start_processing(lambda f, o: encrypt_file(f, o, key), "encrypt")
 
     def start_processing(self, process_func, action):
@@ -932,8 +1082,8 @@ class FilePanel:
 
                 self.app.task_queue.put(('progress', self, ((i + 1) / total) * 100, f"{i+1}/{total}"))
 
-            self.app.task_queue.put(('log', self, f"Completado: {success} OK, {failed} errores", 'info'))
-            self.app.task_queue.put(('progress', self, 100, "Completado"))
+            self.app.task_queue.put(('log', self, t('completed_stats').format(success, failed), 'info'))
+            self.app.task_queue.put(('progress', self, 100, t('completed')))
             self.app.task_queue.put(('done', self))
 
         threading.Thread(target=process, daemon=True).start()
@@ -946,7 +1096,7 @@ class FilePanel:
 class RPGMVConverterApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("RPGMV Converter // RAVENLIGHT EDITION")
+        self.root.title(t('title'))
         self.root.geometry("1200x800")
         self.root.minsize(1100, 700)
         self.root.configure(bg=COLORS['bg_dark'])
@@ -984,17 +1134,17 @@ class RPGMVConverterApp:
 
         # Tab PNG
         png_tab = tk.Frame(self.notebook, bg=COLORS['bg_main'])
-        self.notebook.add(png_tab, text='  PNG  ')
+        self.notebook.add(png_tab, text=t('tab_png'))
         self.png_panel = FilePanel(png_tab, self, 'png')
 
         # Tab OGG
         ogg_tab = tk.Frame(self.notebook, bg=COLORS['bg_main'])
-        self.notebook.add(ogg_tab, text='  OGG  ')
+        self.notebook.add(ogg_tab, text=t('tab_ogg'))
         self.ogg_panel = FilePanel(ogg_tab, self, 'ogg')
 
         # Tab About
         about_tab = tk.Frame(self.notebook, bg=COLORS['bg_dark'])
-        self.notebook.add(about_tab, text='  ACERCA DE  ')
+        self.notebook.add(about_tab, text=t('tab_about'))
         self.create_about_tab(about_tab)
 
         # Status bar
@@ -1018,6 +1168,46 @@ class RPGMVConverterApp:
         v_frame.pack(side=tk.LEFT, padx=(10, 0), pady=(5, 0))
         tk.Label(v_frame, text=f"v{VERSION}", font=('Consolas', 8, 'bold'),
                 bg=COLORS['accent'], fg='white').pack()
+
+        # Language selector (right side)
+        lang_frame = tk.Frame(header, bg=COLORS['bg_dark'])
+        lang_frame.pack(side=tk.RIGHT)
+
+        self.lang_var = tk.StringVar(value=current_language)
+
+        for lang_code in LANGUAGES:
+            lang = LANGUAGES[lang_code]
+            btn = tk.Button(lang_frame,
+                           text=f"{lang['flag']} {lang['name']}",
+                           font=('Segoe UI', 9),
+                           bg=COLORS['bg_card'] if lang_code != current_language else COLORS['accent'],
+                           fg=COLORS['text'],
+                           activebackground=COLORS['accent'],
+                           relief='flat', cursor='hand2', padx=10, pady=4,
+                           command=lambda lc=lang_code: self.change_language(lc))
+            btn.pack(side=tk.LEFT, padx=2)
+            # Store reference for updating
+            if not hasattr(self, 'lang_buttons'):
+                self.lang_buttons = {}
+            self.lang_buttons[lang_code] = btn
+
+    def change_language(self, lang_code):
+        global current_language
+        current_language = lang_code
+
+        # Update button states
+        for lc, btn in self.lang_buttons.items():
+            if lc == lang_code:
+                btn.config(bg=COLORS['accent'])
+            else:
+                btn.config(bg=COLORS['bg_card'])
+
+        # Show restart message
+        if lang_code == 'es':
+            msg = "Idioma cambiado a Español.\nReinicia la aplicación para aplicar todos los cambios."
+        else:
+            msg = "Language changed to English.\nRestart the application to apply all changes."
+        messagebox.showinfo("Language / Idioma", msg)
 
     def create_statusbar(self, parent):
         bar = tk.Frame(parent, bg=COLORS['bg_card'], height=30)
