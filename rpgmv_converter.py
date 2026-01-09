@@ -1193,6 +1193,8 @@ class RPGMVConverterApp:
 
     def change_language(self, lang_code):
         global current_language
+        if current_language == lang_code:
+            return
         current_language = lang_code
 
         # Update button states
@@ -1202,12 +1204,86 @@ class RPGMVConverterApp:
             else:
                 btn.config(bg=COLORS['bg_card'])
 
-        # Show restart message
-        if lang_code == 'es':
-            msg = "Idioma cambiado a Español.\nReinicia la aplicación para aplicar todos los cambios."
-        else:
-            msg = "Language changed to English.\nRestart the application to apply all changes."
-        messagebox.showinfo("Language / Idioma", msg)
+        # Update all UI elements dynamically
+        self.refresh_ui()
+
+    def refresh_ui(self):
+        """Actualiza todos los textos de la UI al idioma actual"""
+        # Update window title
+        self.root.title(t('title'))
+
+        # Update notebook tabs
+        self.notebook.tab(0, text=t('tab_png'))
+        self.notebook.tab(1, text=t('tab_ogg'))
+        self.notebook.tab(2, text=t('tab_about'))
+
+        # Update PNG panel
+        self.refresh_panel(self.png_panel)
+
+        # Update OGG panel
+        self.refresh_panel(self.ogg_panel)
+
+    def refresh_panel(self, panel):
+        """Actualiza los textos de un FilePanel"""
+        # Update title
+        title = t('images_png') if panel.file_type == 'png' else t('audio_ogg')
+        # Find and update the title label (first label in the header)
+        for widget in panel.parent.winfo_children():
+            self._update_panel_widgets(widget, panel)
+
+        # Update file count
+        panel.update_count()
+
+        # Update drop zone
+        panel.drop_label.config(text=t('drop_zone'))
+
+        # Update progress label if ready
+        if panel.progress_label.cget('text') in ['Listo', 'Ready']:
+            panel.progress_label.config(text=t('ready'))
+
+        # Update buttons
+        panel.decrypt_btn.config(text=t('decrypt'))
+        panel.encrypt_btn.config(text=t('encrypt'))
+
+        # Update slideshow button if exists
+        if hasattr(panel, 'slideshow_btn'):
+            panel.slideshow_btn.config(text=f"⛶ {t('slideshow').upper()}")
+
+    def _update_panel_widgets(self, widget, panel):
+        """Recursivamente busca y actualiza widgets"""
+        widget_class = widget.winfo_class()
+
+        if widget_class == 'Label':
+            current_text = widget.cget('text')
+            # Update specific labels based on current text
+            if current_text in ['IMAGENES (PNG)', 'IMAGES (PNG)']:
+                widget.config(text=t('images_png'))
+            elif current_text in ['AUDIO (OGG)']:
+                widget.config(text=t('audio_ogg'))
+            elif current_text in ['PREVIEW']:
+                widget.config(text=t('preview'))
+            elif current_text in ['OPCIONES', 'OPTIONS']:
+                widget.config(text=t('options'))
+
+        elif widget_class == 'Checkbutton':
+            current_text = widget.cget('text')
+            if current_text in ['Preservar estructura', 'Preserve structure']:
+                widget.config(text=t('preserve_structure'))
+
+        elif widget_class == 'Button':
+            current_text = widget.cget('text')
+            if current_text in ['Archivos', 'Files']:
+                widget.config(text=t('select_files'))
+            elif current_text in ['Carpeta', 'Folder']:
+                widget.config(text=t('select_folder'))
+            elif current_text in ['Limpiar', 'Clear']:
+                widget.config(text=t('clear'))
+            elif current_text in ['Slideshow']:
+                widget.config(text=t('slideshow'))
+
+        # Recurse into children
+        for child in widget.winfo_children():
+            self._update_panel_widgets(child, panel)
 
     def create_statusbar(self, parent):
         bar = tk.Frame(parent, bg=COLORS['bg_card'], height=30)

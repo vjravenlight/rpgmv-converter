@@ -6,6 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
@@ -40,11 +43,16 @@ jobs:
       run: |
         pyinstaller --onefile --windowed --name "RPGMV_Converter" rpgmv_converter.py
 
+    - name: Rename artifact
+      shell: bash
+      run: |
+        mv dist/${{ matrix.artifact_name }} dist/${{ matrix.asset_name }}
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.asset_name }}
-        path: dist/${{ matrix.artifact_name }}
+        path: dist/${{ matrix.asset_name }}
 
   release:
     needs: build
@@ -54,15 +62,19 @@ jobs:
     steps:
     - name: Download all artifacts
       uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+
+    - name: List artifacts
+      run: find artifacts -type f
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: |
-          RPGMV_Converter_Windows.exe/*
-          RPGMV_Converter_Linux/*
-          RPGMV_Converter_MacOS/*
+          artifacts/RPGMV_Converter_Windows.exe/RPGMV_Converter_Windows.exe
+          artifacts/RPGMV_Converter_Linux/RPGMV_Converter_Linux
+          artifacts/RPGMV_Converter_MacOS/RPGMV_Converter_MacOS
         draft: false
         prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        generate_release_notes: true
