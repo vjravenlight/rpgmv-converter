@@ -1,0 +1,30 @@
+# Build artifacts
+build/
+dist/
+dist_nuitka/
+protected/
+*.spec
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+
+# Backup
+backup/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+nul
