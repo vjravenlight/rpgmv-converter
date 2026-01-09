@@ -1,4 +1,4 @@
-# RPGMV Converter - RAVENLIGHT EDITION
+# RPGMV Converter
 
 Encrypt and decrypt images and audio from RPG Maker MV/MZ games.
 
