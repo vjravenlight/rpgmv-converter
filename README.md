@@ -2,14 +2,14 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.1.0-red)
+![Version](https://img.shields.io/badge/version-1.2.0-red)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
 **Encrypt and decrypt images and audio from RPG Maker MV/MZ games**
 
-Made specifically for **Look Outside**, but works with any RPG Maker MV/MZ game.
+Works with any RPG Maker MV/MZ game using standard RPGMV encryption.
 
 [Download](#download) • [Features](#features) • [Usage](#usage) • [Screenshots](#screenshots)
 
@@ -90,7 +90,7 @@ The encryption key is stored in the game's `data/System.json` file:
 
 ```json
 {
-  "encryptionKey": "d0013f0834670ba59194d07647473ad9"
+  "encryptionKey": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
 }
 ```
 
@@ -144,10 +144,6 @@ RPG Maker MV/MZ uses a simple XOR-based encryption:
 
 - 🌐 [ravenlight.net](https://www.ravenlight.net)
 - 📷 [instagram.com/vjravenlight](https://www.instagram.com/vjravenlight)
-
-### Special Thanks
-
-Made specifically for the game **Look Outside** - an RPG Maker MV game.
 
 ---
 

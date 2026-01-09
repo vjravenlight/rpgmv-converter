@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-RPGMV Converter - RAVENLIGHT EDITION
+RPGMV Converter
 Encripta y desencripta imágenes y audio de RPG Maker MV/MZ
-Hecho especificamente para Look Outside
+by Karl Ravenlight
 """
 
 import os
@@ -22,7 +22,7 @@ import time
 # CONSTANTES
 # ============================================================================
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 RPGMV_HEADER = b'RPGMV\x00\x00\x00\x00\x03\x01\x00\x00\x00\x00\x00'
 
 # ============================================================================
@@ -34,7 +34,7 @@ LANGUAGES = {
         'name': 'Español',
         'flag': '🇪🇸',
         # UI General
-        'title': 'RPGMV Converter // RAVENLIGHT EDITION',
+        'title': 'RPGMV Converter',
         'ready': 'Listo',
         'completed': 'Completado',
         'files': 'archivos',
@@ -90,9 +90,9 @@ LANGUAGES = {
         'about_working': '100% Working',
         'about_links': '>> LINKS',
         'about_compat_title': '[!] COMPATIBILIDAD:',
-        'about_compat1': '    Aunque fue hecho para Look Outside, este programa',
-        'about_compat2': '    funciona con CUALQUIER juego de RPG Maker MV/MZ',
-        'about_compat3': '    que use encriptacion RPGMV estandar.',
+        'about_compat1': '    Este programa funciona con CUALQUIER',
+        'about_compat2': '    juego de RPG Maker MV/MZ que use',
+        'about_compat3': '    encriptacion RPGMV estandar.',
         'about_quote': '"Breaking barriers between creators and their assets"',
         'about_greets': '═══════════[ GREETS TO ALL RPGMAKER DEVS ]═══════════',
         # Status bar
@@ -102,7 +102,7 @@ LANGUAGES = {
         'name': 'English',
         'flag': '🇺🇸',
         # UI General
-        'title': 'RPGMV Converter // RAVENLIGHT EDITION',
+        'title': 'RPGMV Converter',
         'ready': 'Ready',
         'completed': 'Completed',
         'files': 'files',
@@ -158,9 +158,9 @@ LANGUAGES = {
         'about_working': '100% Working',
         'about_links': '>> LINKS',
         'about_compat_title': '[!] COMPATIBILITY:',
-        'about_compat1': '    Although made for Look Outside, this program',
-        'about_compat2': '    works with ANY RPG Maker MV/MZ game',
-        'about_compat3': '    using standard RPGMV encryption.',
+        'about_compat1': '    This program works with ANY',
+        'about_compat2': '    RPG Maker MV/MZ game using',
+        'about_compat3': '    standard RPGMV encryption.',
         'about_quote': '"Breaking barriers between creators and their assets"',
         'about_greets': '═══════════[ GREETS TO ALL RPGMAKER DEVS ]═══════════',
         # Status bar
@@ -1336,20 +1336,20 @@ class RPGMVConverterApp:
         info_frame = tk.Frame(ascii_frame, bg='#0a0a12')
         info_frame.pack(fill=tk.X, padx=30, pady=20)
 
-        # Made for Look Outside
+        # For RPG Maker MV/MZ
         special_frame = tk.Frame(info_frame, bg='#0a0a12')
         special_frame.pack(fill=tk.X, pady=(0, 15))
 
-        tk.Label(special_frame, text="[ HECHO ESPECIFICAMENTE PARA ]",
+        tk.Label(special_frame, text="[ UNIVERSAL TOOL FOR ]",
                 font=('Consolas', 10), bg='#0a0a12', fg=COLORS['accent_pink']).pack()
 
-        # Look Outside title with animation effect
-        self.look_outside_label = tk.Label(special_frame, text="★ LOOK OUTSIDE ★",
+        # RPG Maker title with animation effect
+        self.rpgmaker_label = tk.Label(special_frame, text="★ RPG MAKER MV/MZ ★",
                                            font=('Consolas', 18, 'bold'),
                                            bg='#0a0a12', fg=COLORS['accent_cyan'])
-        self.look_outside_label.pack(pady=(5, 0))
+        self.rpgmaker_label.pack(pady=(5, 0))
 
-        tk.Label(special_frame, text="Un juego de RPG Maker MV",
+        tk.Label(special_frame, text="Asset Encryption/Decryption",
                 font=('Consolas', 10), bg='#0a0a12', fg=COLORS['text_dim']).pack()
 
         # Start animation
@@ -1407,11 +1407,11 @@ class RPGMVConverterApp:
 
         tk.Label(note_frame, text="[!] COMPATIBILIDAD:", font=('Consolas', 10, 'bold'),
                 bg='#0a0a12', fg=COLORS['accent']).pack(anchor='w')
-        tk.Label(note_frame, text="    Aunque fue hecho para Look Outside, este programa",
+        tk.Label(note_frame, text="    Este programa funciona con CUALQUIER",
                 font=('Consolas', 10), bg='#0a0a12', fg=COLORS['text_dim']).pack(anchor='w')
-        tk.Label(note_frame, text="    funciona con CUALQUIER juego de RPG Maker MV/MZ",
+        tk.Label(note_frame, text="    juego de RPG Maker MV/MZ que use",
                 font=('Consolas', 10), bg='#0a0a12', fg=COLORS['text_dim']).pack(anchor='w')
-        tk.Label(note_frame, text="    que use encriptacion RPGMV estandar.",
+        tk.Label(note_frame, text="    encriptacion RPGMV estandar.",
                 font=('Consolas', 10), bg='#0a0a12', fg=COLORS['text_dim']).pack(anchor='w')
 
         # Quote
@@ -1427,14 +1427,14 @@ class RPGMVConverterApp:
         greets.pack(pady=(20, 0))
 
     def animate_title(self):
-        """Animacion del titulo Look Outside"""
+        """Animacion del titulo RPG Maker"""
         colors = [COLORS['accent_cyan'], COLORS['accent_pink'], COLORS['accent_green'],
                   COLORS['accent'], COLORS['accent_orange']]
 
         def cycle():
-            if hasattr(self, 'look_outside_label') and self.look_outside_label.winfo_exists():
+            if hasattr(self, 'rpgmaker_label') and self.rpgmaker_label.winfo_exists():
                 current = getattr(self, '_color_idx', 0)
-                self.look_outside_label.config(fg=colors[current])
+                self.rpgmaker_label.config(fg=colors[current])
                 self._color_idx = (current + 1) % len(colors)
                 self.root.after(800, cycle)
 
